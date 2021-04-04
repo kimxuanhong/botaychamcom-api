@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+var { validationResult } = require('express-validator');
 
 const userSerervice = require('../service/UserService');
+const { validateRegisterUser } = require('../validate/UserRegisterValidator');
 
 
 router.get('/', async function (req, res, next) {
@@ -13,7 +15,15 @@ router.get('/', async function (req, res, next) {
     }
 });
 
-router.post('/', async function (req, res, next) {
+router.post('/', validateRegisterUser(), async function (req, res, next) {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(422).json({ errors: errors.array() });
+        return;
+    }
+
     try {
         console.log(req.body);
         res.json(await userSerervice.create(req.body));

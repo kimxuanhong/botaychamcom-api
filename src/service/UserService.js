@@ -19,6 +19,14 @@ async function getMultiple(page = 1) {
 }
 
 async function create(user) {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(422).json({ errors: errors.array() });
+        return;
+    }
+
     const result = await db.query(
         `INSERT INTO user (username, password, last_name, first_name, age) VALUES (?, ?, ?, ?, ?)`,
         [

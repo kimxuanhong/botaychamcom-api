@@ -4,7 +4,7 @@ const router = express.Router();
 const userSerervice = require('../service/UserService');
 
 
-router.get('/list', async function (req, res, next) {
+router.get('/', async function (req, res, next) {
     try {
         res.json(await userSerervice.getMultiple(req.query.page));
     } catch (err) {

@@ -17,6 +17,10 @@ app.use(
 /* Rest handler middleware */
 RootController(app);
 
+app.use((req, res, next) => {
+	console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+});
+
 /* Error handler middleware */
 RestExceptionHandler(app)
 

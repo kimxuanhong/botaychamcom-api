@@ -4,6 +4,7 @@ var { validationResult } = require('express-validator');
 
 const userSerervice = require('../service/UserService');
 const { validateRegisterUser } = require('../validate/UserRegisterValidator');
+const validator = require('../validate/validator');
 
 
 router.get('/', async function (req, res, next) {
@@ -16,7 +17,6 @@ router.get('/', async function (req, res, next) {
 });
 
 router.post('/', validateRegisterUser(), async function (req, res, next) {
-
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

@@ -3,10 +3,7 @@ function getOffset(currentPage = 1, listPerPage) {
 }
 
 function emptyOrRows(rows) {
-    if (!rows) {
-        return [];
-    }
-    return rows;
+    return !rows ? [] : rows;
 }
 
 module.exports = {
